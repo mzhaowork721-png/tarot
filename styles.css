@@ -1,0 +1,475 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* 头部 */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 主要内容 */
+main {
+    padding: 40px 20px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    text-align: center;
+    color: #667eea;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+/* 牌背占位区 */
+.card-backs-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.card-back-wrapper {
+    text-align: center;
+}
+
+.card-position-label {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* 牌背样式 */
+.card-back {
+    width: 140px;
+    height: 240px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    perspective: 1000px;
+}
+
+.card-back:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 牌背设计 - CSS渐变fallback */
+.card-back-design {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e3a8a 100%);
+    border-radius: 10px;
+    border: 3px solid #fbbf24;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 装饰性图案 */
+.card-back-design::before {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: #fbbf24;
+    opacity: 0.8;
+}
+
+.card-back-design::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid #fbbf24;
+    border-radius: 6px;
+    opacity: 0.6;
+}
+
+/* 如果有图片，使用背景图片 */
+.card-back-design.has-image {
+    background-image: var(--card-back-image);
+    background-size: cover;
+    background-position: center;
+}
+
+.card-back-design.has-image::before,
+.card-back-design.has-image::after {
+    display: none;
+}
+
+/* 抽牌按钮 */
+.draw-section {
+    text-align: center;
+}
+
+.draw-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.draw-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.draw-button:active {
+    transform: translateY(0);
+}
+
+.draw-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.hint-text {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 结果展示区 - 翻牌效果 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+/* 3D翻牌容器 */
+.card-flip-container {
+    perspective: 1000px;
+    width: 200px;
+    height: 340px;
+}
+
+.card-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card-flip-container.flipped .card-flip-inner {
+    transform: rotateY(180deg);
+}
+
+/* 牌背和牌面共同样式 */
+.card-flip-back,
+.card-flip-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 翻牌背面 */
+.card-flip-back {
+    transform: rotateY(0deg);
+}
+
+.card-flip-back .card-back-design {
+    width: 100%;
+    height: 100%;
+}
+
+/* 翻牌正面 */
+.card-flip-front {
+    transform: rotateY(180deg);
+    background: white;
+}
+
+/* 塔罗牌样式 */
+.tarot-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarot-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-position {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.card-image-container {
+    margin: 15px 0;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* 逆位图片旋转 */
+.card-image.reversed {
+    transform: rotate(180deg);
+}
+
+.card-placeholder {
+    width: 100px;
+    height: 150px;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #9ca3af;
+}
+
+.card-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin: 10px 0;
+}
+
+.card-name-cn {
+    font-size: 1.1rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.card-orientation {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 8px 0;
+}
+
+.card-orientation.upright {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.card-orientation.reversed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.card-keywords {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 10px 0;
+    font-style: italic;
+}
+
+.card-meaning {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
+    text-align: left;
+    flex-grow: 1;
+}
+
+/* AI 解读区 */
+.interpretation-content {
+    background: #f9fafb;
+    border-radius: 15px;
+    padding: 30px;
+    line-height: 1.8;
+}
+
+.loading {
+    text-align: center;
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.interpretation-summary {
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border-left: 4px solid #667eea;
+}
+
+.interpretation-summary h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.card-interpretation {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border-left: 4px solid #764ba2;
+}
+
+.card-interpretation h4 {
+    color: #764ba2;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.card-interpretation p {
+    color: #555;
+    line-height: 1.7;
+}
+
+/* 页脚 */
+footer {
+    background: #f9fafb;
+    text-align: center;
+    padding: 25px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-section,
+.interpretation-section {
+    animation: fadeIn 0.6s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .card-backs-container {
+        gap: 15px;
+    }
+
+    .card-back {
+        width: 70px;
+        height: 120px;
+    }
+
+    .card-back-design::before {
+        font-size: 30px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-flip-container {
+        width: 180px;
+        height: 300px;
+    }
+
+    main {
+        padding: 20px 15px;
+    }
+
+    .draw-button {
+        padding: 14px 36px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-backs-container {
+        gap: 10px;
+    }
+
+    .card-back {
+        width: 60px;
+        height: 100px;
+    }
+
+    .card-back-design::before {
+        font-size: 24px;
+    }
+
+    .card-position-label {
+        font-size: 0.75rem;
+    }
+
+    .card-flip-container {
+        width: 160px;
+        height: 270px;
+    }
+}

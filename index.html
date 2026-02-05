@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔罗日运 - Tarot Daily Reading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 塔罗日运</h1>
+            <p class="subtitle">探索今日的神秘指引</p>
+        </header>
+
+        <main>
+            <!-- 牌背占位区 -->
+            <section class="card-placeholder-section">
+                <h2>今日四张牌</h2>
+                <div class="card-backs-container" id="cardBacksContainer">
+                    <div class="card-back-wrapper">
+                        <div class="card-back">
+                            <div class="card-back-design"></div>
+                        </div>
+                        <p class="card-position-label">过去</p>
+                    </div>
+                    <div class="card-back-wrapper">
+                        <div class="card-back">
+                            <div class="card-back-design"></div>
+                        </div>
+                        <p class="card-position-label">现在</p>
+                    </div>
+                    <div class="card-back-wrapper">
+                        <div class="card-back">
+                            <div class="card-back-design"></div>
+                        </div>
+                        <p class="card-position-label">建议</p>
+                    </div>
+                    <div class="card-back-wrapper">
+                        <div class="card-back">
+                            <div class="card-back-design"></div>
+                        </div>
+                        <p class="card-position-label">今日关键能量</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 抽牌按钮 -->
+            <section class="draw-section">
+                <button id="drawButton" class="draw-button">
+                    抽取今日四张牌
+                </button>
+                <p class="hint-text">每天可抽取一次，结果将保持一天</p>
+            </section>
+
+            <!-- 结果展示区 -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>今日牌阵</h2>
+                <div class="cards-grid" id="cardsGrid"></div>
+            </section>
+
+            <!-- AI 解读区 -->
+            <section class="interpretation-section" id="interpretationSection" style="display: none;">
+                <h2>🌟 AI塔罗师解读</h2>
+                <div class="interpretation-content" id="interpretationContent">
+                    <div class="loading">正在解读中...</div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>✨ 塔罗牌仅供娱乐和自我反思，不代表命运的绝对预言 ✨</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
