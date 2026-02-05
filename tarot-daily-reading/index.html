@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>塔罗日运 - Tarot Daily Reading</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 开屏页 -->
+    <section id="lockscreen" class="screen active">
+        <div class="lockscreen-content">
+            <div class="date-time">
+                <div id="currentDate" class="date">2026-02-05</div>
+                <div id="currentTime" class="time">14:36:00</div>
+            </div>
+            <button id="continueBtn" class="btn-primary">继续</button>
+        </div>
+    </section>
+
+    <!-- 抽牌页 -->
+    <section id="drawPage" class="screen">
+        <div class="container">
+            <h1 class="page-title">今日塔罗日运</h1>
+            <div class="draw-area">
+                <div class="tarot-back-cards" id="cardDeck">
+                    <!-- 牌堆效果 -->
+                    <div class="card-stack"></div>
+                    <div class="card-stack"></div>
+                    <div class="card-stack"></div>
+                </div>
+                <button id="drawBtn" class="btn-primary btn-draw">抽取今日四张牌</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结果页 -->
+    <section id="resultPage" class="screen">
+        <div class="container">
+            <h1 class="page-title">今日塔罗日运</h1>
+
+            <!-- 四张牌展示 -->
+            <div class="cards-display" id="cardsDisplay">
+                <!-- 动态生成卡片 -->
+            </div>
+
+            <!-- AI 塔罗师解读 -->
+            <div class="reading-section">
+                <h2 class="reading-title">🔮 AI 塔罗师解读</h2>
+                <div class="reading-content" id="readingContent">
+                    <!-- 动态生成解读内容 -->
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <button id="redrawBtn" class="btn-secondary">重新抽取</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
