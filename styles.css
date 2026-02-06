@@ -11,6 +11,7 @@ body {
     min-height: 100vh;
     padding: 20px;
     color: #333;
+    line-height: 1.6;
 }
 
 .container {
@@ -60,11 +61,12 @@ h2 {
 
 /* 牌背占位区 */
 .card-backs-container {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    justify-items: center;
+    max-width: 800px;
+    margin: 0 auto 20px;
 }
 
 .card-back-wrapper {
@@ -80,8 +82,9 @@ h2 {
 
 /* 牌背样式 */
 .card-back {
-    width: 140px;
-    height: 240px;
+    width: 100%;
+    max-width: 140px;
+    aspect-ratio: 140 / 240;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -151,6 +154,7 @@ h2 {
     color: white;
     border: none;
     padding: 16px 48px;
+    min-height: 56px;
     font-size: 1.2rem;
     border-radius: 50px;
     cursor: pointer;
@@ -189,19 +193,22 @@ h2 {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     justify-items: center;
-    min-height: 400px; /* 确保网格有最小高度 */
-    padding-bottom: 20px; /* 网格底部padding */
+    min-height: 400px;
+    padding-bottom: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* 3D翻牌容器 */
 .card-flip-container {
     perspective: 1000px;
-    width: 200px;
-    height: 340px;
-    margin-bottom: 20px; /* 每张卡片底部额外间距 */
+    width: 100%;
+    max-width: 200px;
+    aspect-ratio: 200 / 340;
+    margin-bottom: 20px;
 }
 
 .card-flip-inner {
@@ -320,6 +327,9 @@ h2 {
     font-weight: 700;
     color: #333;
     margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .card-name-cn {
@@ -352,14 +362,17 @@ h2 {
     color: #666;
     margin: 10px 0;
     font-style: italic;
+    word-wrap: break-word;
+    line-height: 1.6;
 }
 
 .card-meaning {
     font-size: 0.95rem;
     color: #444;
-    line-height: 1.6;
+    line-height: 1.7;
     text-align: left;
     flex-grow: 1;
+    word-wrap: break-word;
 }
 
 /* AI 解读区 - 关键修复 */
@@ -387,6 +400,7 @@ h2 {
     border-radius: 15px;
     padding: 30px;
     line-height: 1.8;
+    word-wrap: break-word;
 }
 
 .loading {
@@ -454,9 +468,32 @@ footer {
 }
 
 /* 响应式设计 */
+
+/* 1024px及以下 - 2列布局 */
+@media (max-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .card-backs-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
+
+/* 768px及以下 - 优化间距和字号 */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 
     .card-backs-container {
@@ -464,36 +501,35 @@ footer {
     }
 
     .card-back {
-        width: 70px;
-        height: 120px;
+        max-width: 100px;
     }
 
     .card-back-design::before {
         font-size: 30px;
     }
 
-    /* 移动端布局修复 */
     .results-section {
-        margin-bottom: 60px; /* 移动端底部间距 */
+        margin-bottom: 60px;
         padding-bottom: 30px;
     }
 
     .cards-grid {
-        grid-template-columns: 1fr;
         gap: 20px;
-        min-height: auto; /* 移动端自适应高度 */
+        min-height: auto;
     }
 
     .card-flip-container {
-        width: 180px;
-        height: 300px;
+        max-width: 180px;
         margin-bottom: 15px;
     }
 
-    /* 移动端解读区间距 */
     .interpretation-section {
         margin-top: 60px;
         padding-top: 30px;
+    }
+
+    .interpretation-content {
+        padding: 20px;
     }
 
     main {
@@ -503,17 +539,52 @@ footer {
     .draw-button {
         padding: 14px 36px;
         font-size: 1rem;
+        min-height: 48px;
+    }
+
+    .card-name {
+        font-size: 1.1rem;
+    }
+
+    .card-keywords {
+        font-size: 0.85rem;
+    }
+
+    .card-meaning {
+        font-size: 0.9rem;
     }
 }
 
+/* 480px及以下 - 单列布局 */
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    header {
+        padding: 30px 15px;
+    }
+
+    header h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
     .card-backs-container {
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
 
     .card-back {
-        width: 60px;
-        height: 100px;
+        max-width: 80px;
     }
 
     .card-back-design::before {
@@ -524,20 +595,56 @@ footer {
         font-size: 0.75rem;
     }
 
-    /* 超小屏幕布局修复 */
     .results-section {
         margin-bottom: 50px;
         padding-bottom: 25px;
     }
 
     .card-flip-container {
-        width: 160px;
-        height: 270px;
+        max-width: 100%;
         margin-bottom: 10px;
     }
 
     .interpretation-section {
         margin-top: 50px;
         padding-top: 25px;
+    }
+
+    .interpretation-content {
+        padding: 15px;
+    }
+
+    .draw-button {
+        padding: 12px 32px;
+        font-size: 0.95rem;
+        min-height: 44px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    main {
+        padding: 15px 10px;
+    }
+
+    .card-name {
+        font-size: 1rem;
+    }
+
+    .card-name-cn {
+        font-size: 0.95rem;
+    }
+
+    .card-keywords {
+        font-size: 0.8rem;
+    }
+
+    .card-meaning {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    footer {
+        padding: 20px 15px;
+        font-size: 0.85rem;
     }
 }
