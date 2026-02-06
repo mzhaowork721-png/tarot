@@ -335,9 +335,10 @@ h2 {
     font-weight: 700;
     color: #333;
     margin: 10px 0;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .card-name-cn {
