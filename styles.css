@@ -275,21 +275,32 @@ h2 {
     transition: transform 0.3s ease;
 }
 
-/* 逆位图片旋转 */
-.card-image.reversed {
-    transform: rotate(180deg);
-}
-
-.card-placeholder {
+/* 文字fallback样式 */
+.card-text-fallback {
     width: 100px;
     height: 150px;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 8px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    color: #9ca3af;
+    padding: 15px;
+    color: white;
+}
+
+.fallback-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.fallback-orientation {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
 }
 
 .card-name {
@@ -340,6 +351,11 @@ h2 {
 }
 
 /* AI 解读区 */
+.interpretation-section {
+    margin-top: 60px;
+    clear: both;
+}
+
 .interpretation-content {
     background: #f9fafb;
     border-radius: 15px;

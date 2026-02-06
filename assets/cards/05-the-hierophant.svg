@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#7b5cff" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#f2c14e" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <circle cx="292" cy="280" r="34" fill="#7b5cff" opacity="0.6169624485596708" /><circle cx="238.68053088550175" cy="315.9642481935294" r="22" fill="#7b5cff" opacity="0.8750231481481482" /><circle cx="189.7505950099754" cy="368.71844000854594" r="29" fill="#f2c14e" opacity="0.7577752057613169" /><circle cx="132.51667736039195" cy="317.31400156411" r="17" fill="#f2c14e" opacity="0.6837371399176955" /><circle cx="155.94186792585487" cy="253.96697565294653" r="17" fill="#7b5cff" opacity="0.8603163580246913" /><circle cx="189.08303220810643" cy="188.3567762549086" r="19" fill="#5b6cff" opacity="0.7504758230452675" /><circle cx="252.39730652639386" cy="226.83545919217397" r="25" fill="#7b5cff" opacity="0.8394007201646091" /><circle cx="210" cy="280" r="29" fill="none" stroke="#f2c14e" stroke-width="3" />
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">The Hierophant</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">教皇</text>
+</svg>

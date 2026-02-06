@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#7b5cff" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#f2c14e" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <circle cx="172" cy="287" r="5" fill="#f2c14e" opacity="0.7" /><circle cx="239" cy="371" r="5" fill="#f2c14e" opacity="0.7" /><circle cx="112" cy="237" r="7" fill="#f2c14e" opacity="0.7" /><circle cx="319" cy="283" r="4" fill="#f2c14e" opacity="0.7" /><circle cx="218" cy="364" r="5" fill="#7b5cff" opacity="0.7" /><circle cx="320" cy="406" r="5" fill="#5b6cff" opacity="0.7" /><circle cx="340" cy="217" r="6" fill="#f2c14e" opacity="0.7" /><circle cx="304" cy="188" r="4" fill="#5b6cff" opacity="0.7" /><circle cx="257" cy="218" r="3" fill="#f2c14e" opacity="0.7" /><circle cx="148" cy="249" r="5" fill="#f2c14e" opacity="0.7" /><circle cx="147" cy="244" r="6" fill="#7b5cff" opacity="0.7" /><circle cx="98" cy="315" r="8" fill="#5b6cff" opacity="0.7" /><circle cx="179" cy="299" r="3" fill="#7b5cff" opacity="0.7" /><circle cx="185" cy="210" r="3" fill="#5b6cff" opacity="0.7" /><circle cx="276" cy="377" r="8" fill="#7b5cff" opacity="0.7" /><circle cx="84" cy="286" r="5" fill="#5b6cff" opacity="0.7" /><circle cx="328" cy="248" r="5" fill="#f2c14e" opacity="0.7" /><circle cx="185" cy="323" r="7" fill="#5b6cff" opacity="0.7" /><circle cx="298" cy="372" r="3" fill="#7b5cff" opacity="0.7" /><circle cx="230" cy="278" r="5" fill="#7b5cff" opacity="0.7" /><circle cx="257" cy="313" r="8" fill="#5b6cff" opacity="0.7" /><circle cx="213" cy="234" r="6" fill="#f2c14e" opacity="0.7" />
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">The World</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">世界</text>
+</svg>

@@ -35,11 +35,67 @@ tarot/
 ├── index.html          # 主页面
 ├── styles.css          # 样式文件（含翻牌动画）
 ├── app.js              # 核心逻辑（正逆位、seed机制）
-├── tarot.json          # 塔罗牌数据
+├── tarot.json          # 塔罗牌数据（78张完整牌库）
+├── scripts/            # 脚本文件夹
+│   └── generate_svgs.js # SVG生成脚本
 ├── assets/             # 资源文件夹
-│   └── card-back.png   # 牌背图片（可选）
+│   ├── card-back.png   # 牌背图片（可选）
+│   └── cards/          # 78张SVG牌面
+│       ├── 00-the-fool.svg ... 21-the-world.svg  # 大阿卡纳22张
+│       ├── wands-ace.svg ... wands-king.svg      # 权杖14张
+│       ├── cups-ace.svg ... cups-king.svg        # 圣杯14张
+│       ├── swords-ace.svg ... swords-king.svg    # 宝剑14张
+│       └── pentacles-ace.svg ... pentacles-king.svg # 星币14张
 └── README.md           # 说明文档
 ```
+
+## 🎴 78张SVG塔罗牌资源
+
+本项目包含完整的78张可商用、无版权风险的SVG塔罗牌面：
+
+### 特点
+- **完全原创**：几何符号+纹样风格，无复杂插画
+- **统一风格**：蓝紫+金色配色，每张牌有独特图案
+- **可商用**：无版权风险，可自由使用和修改
+- **自动生成**：基于seed的算法确保每张牌图案不同但风格统一
+
+### 牌面构成
+- **大阿卡纳**（22张）：00-the-fool.svg ~ 21-the-world.svg
+- **小阿卡纳**（56张）：
+  - 权杖（Wands）14张：红色系
+  - 圣杯（Cups）14张：青色系
+  - 宝剑（Swords）14张：灰色系
+  - 星币（Pentacles）14张：金色系
+
+### 重新生成SVG牌面
+
+如果需要重新生成所有SVG文件（例如修改颜色或图案）：
+
+```bash
+# 确保已安装 Node.js
+node scripts/generate_svgs.js
+```
+
+生成器会在 `assets/cards/` 目录下创建78个SVG文件。
+
+### 自定义SVG样式
+
+编辑 `scripts/generate_svgs.js` 中的配置：
+
+```javascript
+// 颜色方案
+const COLORS = {
+  background: '#f8f9fa',   // 背景色
+  border1: '#5b6cff',      // 主边框色
+  border2: '#7b5cff',      // 次边框色
+  accent: '#f2c14e',       // 点缀色（金色）
+  primary: '#5b6cff',      // 主色
+  secondary: '#7b5cff',    // 次色
+  tertiary: '#9b8cff'      // 第三色
+};
+```
+
+修改后重新运行生成脚本即可。
 
 ## 🎨 如何添加牌背图片
 
@@ -60,19 +116,33 @@ tarot/
 - 深蓝、紫色、金色等神秘色调
 - 对称的装饰性图案
 
-## 📝 如何添加牌面图片
+## 📝 完整的78张塔罗牌库
 
-在 `tarot.json` 中为每张牌添加 `image` 字段：
+本项目已包含完整的78张塔罗牌数据和SVG图片：
+
+### 牌库组成
+- **大阿卡纳**（Major Arcana）：22张，编号0-21
+- **小阿卡纳**（Minor Arcana）：56张，分四个花色
+  - 权杖（Wands）：14张（Ace, 2-10, Page, Knight, Queen, King）
+  - 圣杯（Cups）：14张
+  - 宝剑（Swords）：14张
+  - 星币（Pentacles）：14张
+
+所有牌面已生成为SVG格式，存放在 `assets/cards/` 目录。
+
+### 自定义牌面图片
+
+如果想替换现有的SVG为自己的图片：
+
+1. 准备牌面图片（建议尺寸：420x720px或等比例）
+2. 放置到 `assets/cards/` 目录
+3. 在 `tarot.json` 中更新对应的 `image` 字段：
 
 ```json
 {
   "name": "The Fool",
   "name_cn": "愚者",
-  "keywords_upright": "新开始、冒险、自由、天真",
-  "keywords_reversed": "鲁莽、冲动、逃避责任、恐惧",
-  "meaning_upright": "代表全新的开始...",
-  "meaning_reversed": "可能过于冲动...",
-  "image": "assets/cards/fool.jpg"
+  "image": "assets/cards/custom-fool.jpg"
 }
 ```
 
@@ -116,7 +186,7 @@ const isReversed = rng.next() < 0.5;  // 0.5 = 50%概率
 
 ## 📊 数据格式说明
 
-### 新版格式（推荐）
+### 大阿卡纳格式
 ```json
 {
   "name": "The Magician",
@@ -127,7 +197,23 @@ const isReversed = rng.next() < 0.5;  // 0.5 = 50%概率
   "keywords_reversed": "操纵、欺骗、才能未发挥、缺乏信心",
   "meaning_upright": "你拥有将想法变为现实的所有资源...",
   "meaning_reversed": "可能在滥用才能或感到能力不足...",
-  "image": "assets/cards/magician.jpg"
+  "image": "assets/cards/01-the-magician.svg"
+}
+```
+
+### 小阿卡纳格式
+```json
+{
+  "name": "Ace of Wands",
+  "name_cn": "权杖王牌",
+  "arcana": "minor",
+  "suit": "wands",
+  "rank": "Ace",
+  "keywords_upright": "灵感、新机会、创造力、潜力",
+  "keywords_reversed": "延迟、缺乏方向、错失良机",
+  "meaning_upright": "新的创意灵感和机会出现...",
+  "meaning_reversed": "可能感到缺乏灵感或错失机会...",
+  "image": "assets/cards/wands-ace.svg"
 }
 ```
 

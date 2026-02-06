@@ -211,12 +211,19 @@ function createCardElement(card) {
     const orientationText = card.isReversed ? '逆位' : '正位';
     const orientationClass = card.isReversed ? 'reversed' : 'upright';
 
+    // 创建图片容器
     let imageHTML = '';
     if (card.image && card.image.trim() !== '') {
-        const imageClass = card.isReversed ? 'card-image reversed' : 'card-image';
-        imageHTML = `<img src="${card.image}" alt="${card.name}" class="${imageClass}" onerror="this.parentElement.innerHTML='<div class=\\'card-placeholder\\'>🃏</div>'">`;
+        const imageRotation = card.isReversed ? 'transform: rotate(180deg);' : '';
+        imageHTML = `
+            <img src="${card.image}"
+                 alt="${card.name}"
+                 class="card-image"
+                 style="${imageRotation} object-fit: contain;"
+                 onerror="this.parentElement.innerHTML='<div class=\\'card-text-fallback\\'><div class=\\'fallback-name\\'>${card.name_cn}</div><div class=\\'fallback-orientation\\'>${orientationText}</div></div>'">
+        `;
     } else {
-        imageHTML = '<div class="card-placeholder">🃏</div>';
+        imageHTML = `<div class="card-text-fallback"><div class="fallback-name">${card.name_cn}</div><div class="fallback-orientation">${orientationText}</div></div>`;
     }
 
     cardDiv.innerHTML = `

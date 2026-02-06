@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#7b5cff" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#f2c14e" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <polygon points="210,218 221.10114312037103,256.94823878413774 258.47355191301784,241.34363228475854 234.94404216942218,274.3066851499167 270.4455305552731,293.7962979052915 230.00356869916683,295.95231372026655 236.9007918252886,335.86006980995 210,305.58552469135805 183.0992081747114,335.86006980995 189.99643130083317,295.95231372026655 149.55446944472692,293.7962979052915 185.05595783057782,274.3066851499167 161.52644808698216,241.34363228475854 198.89885687962897,256.94823878413774 " fill="#7b5cff" opacity="0.8" stroke="#f2c14e" stroke-width="2" />
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">The Moon</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">月亮</text>
+</svg>

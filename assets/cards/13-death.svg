@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#7b5cff" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#f2c14e" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <line x1="230" y1="280" x2="275" y2="280" stroke="#7b5cff" stroke-width="3" opacity="0.8" /><line x1="225.32088886237955" y1="292.8557521937308" x2="261.32497768897156" y2="323.06676984899815" stroke="#5b6cff" stroke-width="2" opacity="0.8" /><line x1="213.47296355333862" y1="299.69615506024417" x2="223.1972615026867" y2="354.84538922892784" stroke="#5b6cff" stroke-width="2" opacity="0.8" /><line x1="200" y1="297.3205080756888" x2="150.00000000000003" y2="383.92304845413264" stroke="#f2c14e" stroke-width="3" opacity="0.8" /><line x1="191.20614758428184" y1="286.8404028665134" x2="115.09104530062326" y2="314.54403447589254" stroke="#f2c14e" stroke-width="3" opacity="0.8" /><line x1="191.20614758428184" y1="273.1595971334866" x2="111.33227481747961" y2="244.08788495080478" stroke="#5b6cff" stroke-width="2" opacity="0.8" /><line x1="200" y1="262.6794919243112" x2="161.49999999999994" y2="195.99553583290947" stroke="#5b6cff" stroke-width="3" opacity="0.8" /><line x1="213.4729635533386" y1="260.30384493975583" x2="227.8857622996938" y2="178.56480143974255" stroke="#f2c14e" stroke-width="4" opacity="0.8" /><line x1="225.32088886237955" y1="267.1442478062692" x2="275.8798221082321" y2="224.7202655669576" stroke="#7b5cff" stroke-width="4" opacity="0.8" />
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">Death</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">死神</text>
+</svg>

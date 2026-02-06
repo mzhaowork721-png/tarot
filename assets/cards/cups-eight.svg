@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#4ecdc4" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#4ecdc4" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#4ecdc4" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <g transform="translate(210, 200)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(266.5685424949238, 223.4314575050762)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(290, 280)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(266.5685424949238, 336.5685424949238)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(210, 360)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(153.4314575050762, 336.5685424949238)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(130, 280)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g><g transform="translate(153.4314575050762, 223.4314575050762)"><ellipse cx="0" cy="0" rx="20" ry="15" fill="none" stroke="#4ecdc4" stroke-width="3" />
+              <path d="M -15,0 Q 0,20 15,0" fill="#4ecdc4" opacity="0.5" /></g>
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#4ecdc4" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="18" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">Eight of Cups</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">圣杯八</text>
+</svg>

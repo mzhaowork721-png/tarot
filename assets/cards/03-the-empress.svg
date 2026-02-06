@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 720" width="420" height="720">
+  
+    <defs>
+      <pattern id="bgPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="20" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+        <line x1="20" y1="0" x2="0" y2="20" stroke="#5b6cff" stroke-width="0.5" opacity="0.1" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="420" height="720" fill="#f8f9fa" />
+    <rect x="0" y="0" width="420" height="720" fill="url(#bgPattern)" />
+  
+
+  <!-- 外边框 -->
+  <rect x="10" y="10" width="400" height="700" rx="20" ry="20"
+        fill="none" stroke="#5b6cff" stroke-width="3" />
+  <rect x="18" y="18" width="384" height="684" rx="16" ry="16"
+        fill="none" stroke="#7b5cff" stroke-width="2" />
+
+  <!-- 顶部装饰 -->
+  <rect x="30" y="30" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+  <circle cx="210" cy="60" r="8" fill="#f2c14e" />
+
+  <!-- 中央图案区域 -->
+  <g id="centralPattern">
+    <polygon points="210,201 226.74148348429398,239.5824835179723 265.86143571373725,224.13856428626275 250.4175164820277,263.258516515706 289,280 250.4175164820277,296.741483484294 265.86143571373725,335.86143571373725 226.74148348429398,320.41751648202774 210,359 193.25851651570602,320.41751648202774 154.13856428626275,335.86143571373725 169.5824835179723,296.741483484294 131,280 169.5824835179723,263.258516515706 154.13856428626275,224.13856428626275 193.258516515706,239.5824835179723 " fill="#5b6cff" opacity="0.8" stroke="#f2c14e" stroke-width="2" />
+  </g>
+
+  <!-- 底部装饰 -->
+  <rect x="30" y="688" width="360" height="2" fill="#f2c14e" opacity="0.5" />
+
+  <!-- 卡片名称 -->
+  <text x="210" y="650" font-family="Arial, sans-serif" font-size="20" font-weight="bold"
+        text-anchor="middle" fill="#5b6cff">The Empress</text>
+  <text x="210" y="675" font-family="Arial, sans-serif" font-size="16"
+        text-anchor="middle" fill="#7b5cff">皇后</text>
+</svg>
