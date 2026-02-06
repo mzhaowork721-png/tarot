@@ -54,6 +54,8 @@ h2 {
     color: #667eea;
     margin-bottom: 30px;
     font-size: 1.8rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* 牌背占位区 */
@@ -177,12 +179,21 @@ h2 {
     font-size: 0.9rem;
 }
 
-/* 结果展示区 - 翻牌效果 */
+/* 结果展示区 - 关键修复 */
+.results-section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 80px; /* 增加底部间距，确保与解读区分离 */
+    padding-bottom: 40px; /* 额外的内部padding */
+}
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     justify-items: center;
+    min-height: 400px; /* 确保网格有最小高度 */
+    padding-bottom: 20px; /* 网格底部padding */
 }
 
 /* 3D翻牌容器 */
@@ -190,6 +201,7 @@ h2 {
     perspective: 1000px;
     width: 200px;
     height: 340px;
+    margin-bottom: 20px; /* 每张卡片底部额外间距 */
 }
 
 .card-flip-inner {
@@ -350,13 +362,27 @@ h2 {
     flex-grow: 1;
 }
 
-/* AI 解读区 */
+/* AI 解读区 - 关键修复 */
 .interpretation-section {
-    margin-top: 60px;
-    clear: both;
+    position: relative;
+    z-index: 1;
+    margin-top: 80px; /* 确保与牌阵区有足够间距 */
+    padding-top: 40px; /* 额外的顶部padding */
+    clear: both; /* 清除浮动 */
+}
+
+/* 确保解读区标题不被覆盖 */
+.interpretation-section h2 {
+    position: relative;
+    z-index: 2;
+    background: white; /* 添加白色背景 */
+    padding: 10px 0; /* 上下padding */
+    margin-top: 0;
 }
 
 .interpretation-content {
+    position: relative;
+    z-index: 1;
     background: #f9fafb;
     border-radius: 15px;
     padding: 30px;
@@ -446,14 +472,28 @@ footer {
         font-size: 30px;
     }
 
+    /* 移动端布局修复 */
+    .results-section {
+        margin-bottom: 60px; /* 移动端底部间距 */
+        padding-bottom: 30px;
+    }
+
     .cards-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+        min-height: auto; /* 移动端自适应高度 */
     }
 
     .card-flip-container {
         width: 180px;
         height: 300px;
+        margin-bottom: 15px;
+    }
+
+    /* 移动端解读区间距 */
+    .interpretation-section {
+        margin-top: 60px;
+        padding-top: 30px;
     }
 
     main {
@@ -484,8 +524,20 @@ footer {
         font-size: 0.75rem;
     }
 
+    /* 超小屏幕布局修复 */
+    .results-section {
+        margin-bottom: 50px;
+        padding-bottom: 25px;
+    }
+
     .card-flip-container {
         width: 160px;
         height: 270px;
+        margin-bottom: 10px;
+    }
+
+    .interpretation-section {
+        margin-top: 50px;
+        padding-top: 25px;
     }
 }
