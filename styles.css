@@ -65,11 +65,16 @@ h2 {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     justify-items: center;
+    align-items: start;
     max-width: 800px;
     margin: 0 auto 20px;
 }
 
 .card-back-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
@@ -78,13 +83,16 @@ h2 {
     font-size: 0.9rem;
     color: #666;
     font-weight: 500;
+    width: 100%;
+    text-align: center;
+    min-height: 1.5em;
 }
 
 /* 牌背样式 */
 .card-back {
     width: 100%;
     max-width: 140px;
-    aspect-ratio: 140 / 240;
+    aspect-ratio: 7 / 12;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -479,6 +487,11 @@ footer {
     .card-backs-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
+        align-items: start;
+    }
+
+    .card-back-wrapper {
+        width: 100%;
     }
 
     h2 {
