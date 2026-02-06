@@ -19,8 +19,12 @@ const cardBacksContainer = document.getElementById('cardBacksContainer');
 document.addEventListener('DOMContentLoaded', async () => {
     await loadTarotDeck();
     checkCardBackImage();
+    initializeDeviceId();
     checkTodayReading();
     drawButton.addEventListener('click', drawCards);
+
+    // 添加隐藏的重置按钮（用于测试）
+    setupResetButton();
 });
 
 // 加载塔罗牌数据
@@ -52,11 +56,48 @@ function checkCardBackImage() {
     img.src = 'assets/card-back.png';
 }
 
-// 获取今天的日期种子
+// 获取或生成设备唯一ID
+function getDeviceId() {
+    let deviceId = localStorage.getItem('tarot_device_id');
+
+    if (!deviceId) {
+        // 生成新的设备ID（使用时间戳 + 随机数确保唯一性）
+        deviceId = generateUUID();
+        localStorage.setItem('tarot_device_id', deviceId);
+        console.log('生成新的设备ID:', deviceId);
+    }
+
+    return deviceId;
+}
+
+// 生成UUID（简化版）
+function generateUUID() {
+    // 使用时间戳和随机数生成唯一ID
+    const timestamp = Date.now().toString(36);
+    const randomStr = Math.random().toString(36).substring(2, 15);
+    const randomStr2 = Math.random().toString(36).substring(2, 15);
+    return `${timestamp}-${randomStr}-${randomStr2}`;
+}
+
+// 初始化设备ID（确保在使用前已生成）
+function initializeDeviceId() {
+    const deviceId = getDeviceId();
+    console.log('当前设备ID:', deviceId);
+}
+
+// 获取今天的日期 + 设备ID 种子
 function getTodaySeed() {
     const today = new Date();
     const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    return dateString;
+    const deviceId = getDeviceId();
+    // 组合日期和设备ID作为种子
+    return `${dateString}-${deviceId}`;
+}
+
+// 获取今天的日期字符串（用于存储标识）
+function getTodayDateString() {
+    const today = new Date();
+    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 }
 
 // 基于种子的伪随机数生成器 (Seeded Random)
@@ -100,7 +141,11 @@ function checkTodayReading() {
     if (saved) {
         try {
             const data = JSON.parse(saved);
-            if (data.date === getTodaySeed()) {
+            const todayDateString = getTodayDateString();
+            const currentDeviceId = getDeviceId();
+
+            // 检查是否是同一天且同一设备
+            if (data.date === todayDateString && data.deviceId === currentDeviceId) {
                 todayCards = data.cards;
                 displayCards(todayCards);
                 generateInterpretation(todayCards);
@@ -144,9 +189,10 @@ function drawCards() {
         };
     });
 
-    // 保存到本地存储
+    // 保存到本地存储（包含日期和设备ID）
     localStorage.setItem('tarot_daily_reading', JSON.stringify({
-        date: seed,
+        date: getTodayDateString(),
+        deviceId: getDeviceId(),
         cards: todayCards
     }));
 
@@ -326,6 +372,74 @@ function getMockAdvice(card) {
     const index = rng.nextInt(templates.length);
 
     return templates[index];
+}
+
+// 重置今日抽牌结果
+function resetTodayReading() {
+    // 清除今日抽牌缓存
+    localStorage.removeItem('tarot_daily_reading');
+
+    // 重置全局变量
+    todayCards = null;
+
+    // 重置UI
+    resultsSection.style.display = 'none';
+    interpretationSection.style.display = 'none';
+    cardsGrid.innerHTML = '';
+    interpretationContent.innerHTML = '';
+
+    // 恢复按钮状态
+    drawButton.textContent = '抽取今日四张牌';
+    drawButton.disabled = false;
+
+    console.log('已重置今日抽牌结果');
+}
+
+// 重置设备ID（慎用，会改变所有历史记录）
+function resetDeviceId() {
+    const oldId = getDeviceId();
+    localStorage.removeItem('tarot_device_id');
+    const newId = getDeviceId();
+    console.log('已重置设备ID:', oldId, '->', newId);
+
+    // 自动重置今日抽牌
+    resetTodayReading();
+}
+
+// 设置重置按钮（隐藏的测试功能）
+function setupResetButton() {
+    // 添加键盘快捷键：按 Ctrl+Shift+R 重置今日抽牌
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+            e.preventDefault();
+            if (confirm('确定要重置今日抽牌结果吗？')) {
+                resetTodayReading();
+                alert('已重置今日抽牌，可以重新抽牌了！');
+            }
+        }
+
+        // 按 Ctrl+Shift+D 重置设备ID（更彻底的重置）
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            e.preventDefault();
+            if (confirm('确定要重置设备ID吗？这会让你的抽牌结果与其他设备不同！')) {
+                resetDeviceId();
+                alert('已重置设备ID并清除今日抽牌！');
+            }
+        }
+    });
+
+    // 可选：在控制台暴露重置函数供测试
+    window.tarotDebug = {
+        resetToday: resetTodayReading,
+        resetDevice: resetDeviceId,
+        getDeviceId: getDeviceId,
+        getSeed: getTodaySeed
+    };
+
+    console.log('🎴 塔罗牌调试功能已启用：');
+    console.log('  - Ctrl+Shift+R: 重置今日抽牌');
+    console.log('  - Ctrl+Shift+D: 重置设备ID');
+    console.log('  - window.tarotDebug: 调试函数');
 }
 
 // 工具函数：生成随机索引
