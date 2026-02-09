@@ -292,14 +292,153 @@ function generateInterpretation(cards) {
     interpretationSection.style.display = 'block';
     interpretationContent.innerHTML = '<div class="loading">正在解读中...</div>';
 
-    // 模拟AI处理延迟
+    // 模拟处理延迟
     setTimeout(() => {
-        const interpretation = createMockInterpretation(cards);
+        const interpretation = generateRationalReading(cards);
         interpretationContent.innerHTML = interpretation;
     }, 2000);
 }
 
-// 创建模拟的AI解读（识别正逆位）
+// 【理性引导型塔罗师】解读生成器
+function generateRationalReading(cards) {
+    const past = cards[0];
+    const present = cards[1];
+    const advice = cards[2];
+    const energy = cards[3];
+
+    // 使用seeded RNG选择模板（确保同设备同日固定）
+    const seed = getTodaySeed();
+    const rng = new SeededRandom(seed);
+    const templateIndex = rng.nextInt(6); // 6组模板
+
+    // 辅助函数：格式化牌名
+    const formatCard = (card) => {
+        return `【${card.name_cn}（${card.isReversed ? '逆位' : '正位'}）】`;
+    };
+
+    // 辅助函数：判断牌是否负面
+    const isNegativeCard = (card) => {
+        const negativeKeywords = ['困境', '阻碍', '焦虑', '失败', '痛苦', '冲突', '混乱', '停滞', '失去', '悲伤'];
+        const keywords = card.keywords.toLowerCase();
+        return negativeKeywords.some(keyword => keywords.includes(keyword));
+    };
+
+    // 1. 整体判断模板（6种）
+    const openingTemplates = [
+        () => {
+            const theme = present.isReversed ? '正在经历某种转折' : '处于相对稳定的状态';
+            return `今天的牌阵显示你${theme}。`;
+        },
+        () => {
+            return `从牌面看，${formatCard(past)}与${formatCard(present)}之间存在明显的因果关系。`;
+        },
+        () => {
+            const tension = (past.isReversed !== present.isReversed) ? '形成了一种对比' : '延续了某种趋势';
+            return `过去到现在的能量${tension}，需要关注这个变化。`;
+        },
+        () => {
+            return `今天的核心议题围绕着${formatCard(energy)}所代表的能量展开。`;
+        },
+        () => {
+            return `牌阵揭示了一个从${past.name_cn}到${present.name_cn}的演变过程。`;
+        },
+        () => {
+            const focus = isNegativeCard(present) ? '如何应对当下的挑战' : '如何把握现有的机会';
+            return `今天的重点在于${focus}。`;
+        }
+    ];
+
+    // 2. 串联解读模板（6种，过去→现在→建议→能量）
+    const narrativeTemplates = [
+        () => {
+            return `${formatCard(past)}说明之前你${past.keywords.split('、')[0]}，这直接影响了当下${formatCard(present)}所体现的${present.keywords.split('、')[0]}状态。面对这种情况，${formatCard(advice)}给出的方向是${advice.keywords.split('、')[0]}，而${formatCard(energy)}则提醒你今天的关键在于${energy.keywords.split('、')[0]}。`;
+        },
+        () => {
+            const pastAction = past.isReversed ? '没能完全发挥' : '充分体现了';
+            const presentState = present.isReversed ? '出现了一些需要调整的信号' : '延续了这种势头';
+            return `过去${pastAction}${past.name_cn}的能量，导致现在${presentState}。${formatCard(advice)}建议你采取${advice.keywords.split('、')[0]}的策略，同时借助${formatCard(energy)}的${energy.keywords.split('、')[0]}力量。`;
+        },
+        () => {
+            return `回顾${formatCard(past)}，你经历了${past.meaning.substring(0, 20)}...这让你进入了${formatCard(present)}的现状。要突破当前局面，${formatCard(advice)}和${formatCard(energy)}共同指向：${advice.keywords.split('、')[0]}与${energy.keywords.split('、')[0]}的结合。`;
+        },
+        () => {
+            return `${past.name_cn}到${present.name_cn}的转变并非偶然。${formatCard(advice)}提示你通过${advice.keywords.split('、')[0]}来应对，${formatCard(energy)}则强调今天${energy.keywords.split('、')[0]}的重要性。`;
+        },
+        () => {
+            const chain = `${past.keywords.split('、')[0]} → ${present.keywords.split('、')[0]} → ${advice.keywords.split('、')[0]}`;
+            return `从${formatCard(past)}到${formatCard(present)}，能量链条是：${chain}。${formatCard(energy)}作为今日关键能量，要求你把注意力放在${energy.keywords.split('、')[0]}上。`;
+        },
+        () => {
+            return `${formatCard(past)}奠定了基础，${formatCard(present)}反映了当前处境，${formatCard(advice)}指明了方向，${formatCard(energy)}则是今天最需要调动的资源——${energy.keywords.split('、')[0]}。`;
+        }
+    ];
+
+    // 3. 可执行建议模板（6种）
+    const actionTemplates = [
+        () => {
+            const actions = [];
+            if (isNegativeCard(present)) {
+                actions.push(`承认当前${present.keywords.split('、')[0]}的状态，不要强行乐观`);
+                actions.push(`具体行动：${advice.keywords.split('、')[0]}，从小事开始`);
+            } else {
+                actions.push(`趁${present.keywords.split('、')[0]}的势头，推进重要事项`);
+                actions.push(`保持${advice.keywords.split('、')[0]}的态度，但避免过度`);
+            }
+            return `今天可以做的：• ${actions.join('；• ')}。`;
+        },
+        () => {
+            const primary = advice.keywords.split('、')[0];
+            const secondary = energy.keywords.split('、')[0];
+            return `具体建议：把${primary}作为行动原则，在处理具体事务时调用${secondary}的能量。避免被${present.keywords.split('、')[1] || present.keywords.split('、')[0]}牵着走。`;
+        },
+        () => {
+            if (isNegativeCard(present) || isNegativeCard(energy)) {
+                return `面对${present.name_cn}${present.isReversed ? '逆位' : ''}的状况，不要急于"解决"，而是先${advice.keywords.split('、')[0]}。今天不适合强推，适合${energy.keywords.split('、')[0]}。`;
+            } else {
+                return `今天的行动指南：以${advice.keywords.split('、')[0]}为核心，配合${energy.keywords.split('、')[0]}。可以尝试之前搁置的计划。`;
+            }
+        },
+        () => {
+            return `两条建议：一是${advice.keywords.split('、')[0]}（${formatCard(advice)}的提示），二是关注${energy.keywords.split('、')[0]}（${formatCard(energy)}的要求）。不要在${present.keywords.split('、')[1] || '无关紧要的事'}上消耗精力。`;
+        },
+        () => {
+            const warning = isNegativeCard(energy) ? `，但要警惕${energy.keywords.split('、')[1] || '过度'}` : '';
+            return `行动方案：用${advice.keywords.split('、')[0]}的方式处理手头的事，借助${energy.keywords.split('、')[0]}的力量推进${warning}。`;
+        },
+        () => {
+            return `• ${advice.keywords.split('、')[0]}是今天的方法论\n• ${energy.keywords.split('、')[0]}是今天的燃料\n• 避开${present.isReversed ? present.keywords.split('、')[1] : '冲动行事'}的陷阱`;
+        }
+    ];
+
+    // 4. 收尾模板（6种，克制、不给预言）
+    const closingTemplates = [
+        () => '牌面到此为止，剩下的由你自己书写。',
+        () => '塔罗只是提供视角，具体怎么做仍然是你的选择。',
+        () => `${formatCard(energy)}的能量会持续到今晚，用或不用取决于你。`,
+        () => '以上解读仅供参考，不构成对未来的承诺。',
+        () => '牌意已明，行动与否在你。',
+        () => '这是一天的提示，不是一生的判决。'
+    ];
+
+    // 组合四段
+    const opening = openingTemplates[templateIndex % 6]();
+    const narrative = narrativeTemplates[templateIndex % 6]();
+    const action = actionTemplates[templateIndex % 6]();
+    const closing = closingTemplates[templateIndex % 6]();
+
+    // 组装最终输出
+    const fullText = `
+        <div class="interpretation-summary">
+            <p>${opening} ${narrative}</p>
+            <p>${action}</p>
+            <p style="margin-top: 15px; color: #888; font-size: 0.95rem;">${closing}</p>
+        </div>
+    `;
+
+    return fullText;
+}
+
+// 创建模拟的AI解读（识别正逆位）- 保留作为备用
 function createMockInterpretation(cards) {
     const pastCard = cards[0];
     const presentCard = cards[1];
